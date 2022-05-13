@@ -68,7 +68,7 @@ if (!mysqli_set_charset($link, "utf8")) {
 <label for="exampleFormControlInput1">Тип</label>
 <input class="form-control" id="exampleFormControlInput1" type="text" name="tipe" required>
 
-<script> function checkWGSKey(key) {return (key >= '0' && key <= '9') || key == '.' || key == 'ArrowLeft' || key == 'ArrowRight' || key == 'Delete' || key == 'Backspace';} </script>
+<script> function checkWGSKey(key) {return (key >= '0' && key <= '9') || key == '.' || key == 'ArrowLeft' || key == 'ArrowRight' || key == 'Delete' || key == 'Backspace' || key == 'Control' || key == 'v';} </script>
 <label for="exampleFormControlInput1">WGS 84 (Y Google)</label>
 <input class="form-control" id="exampleFormControlInput1" onkeydown="return checkWGSKey(event.key)" type="text" name="ywgs" required>
 
