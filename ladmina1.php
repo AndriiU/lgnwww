@@ -73,33 +73,73 @@ if (!mysqli_set_charset($link, "utf8")) {
 	</td>
 </tr>
 <tr>
-	<td colspan="2">
+	<td>
+	<!-- <td colspan="2"> -->
 		<label for="exampleFormControlInput1">Тип:</label>
-		<input class="form-control" id="exampleFormControlInput1" type="text" name="tipe" required>
+		<select  class="js-chosen" class="form-control" id="exampleFormControlInput1" name="ovt"> 
+        <option value="" selected="selected">Оберіть тип ОВТ</option>
+        <?php 
+			$ovtselect = mysqli_query($link,'SELECT COUNT(1) FROM `ovt`' );	
+			$ovt_i = mysqli_fetch_array( $ovtselect );
+			$ovt_count = $ovt_i[0];
+
+			$ovt = mysqli_query($link,'SELECT * FROM `ovt`');
+			for ($i=0; $i < $ovt_count; $i++) { 
+					$ovt_row = mysqli_fetch_assoc($ovt); 
+					$ovt_id = $ovt_row['id_ovt'];
+					$ovt_name = $ovt_row['ovt'];
+					echo '<option value="'. $ovt_id .'"> '. $ovt_name .'</option>';
+			}
+        ?>
+    </select>
+	</td>
+	<td>
+		<script> function checQuantityKey(key) {
+			return (key >= '0' && key <= '9') || key == '.' || key == 'ArrowLeft' 
+			|| key == 'ArrowRight' || key == 'Delete' || key == 'Backspace' 
+			|| key == 'Control' || key == 'c' || key == 'v' || key == 'с' || key == 'м';
+			} </script>
+		<label for="exampleFormControlInput1">Кількість:</label>
+		<input class="form-control" id="exampleFormControlInput1" onkeydown="return checQuantityKey(event.key)" type="text" name="quantity" required>
 	</td>
 </tr>
 <tr>
 	<td>
-		<script> function checkWGSKey(key) {return (key >= '0' && key <= '9') || key == '.' || key == 'ArrowLeft' 
-		|| key == 'ArrowRight' || key == 'Delete' || key == 'Backspace' || key == 'Control' || key == 'c' || key == 'v';} </script>
+		<script> function checkWGSKey(key) {
+			return (key >= '0' && key <= '9') || key == '.' || key == 'ArrowLeft' 
+			|| key == 'ArrowRight' || key == 'Delete' || key == 'Backspace' 
+			|| key == 'Control' || key == 'c' || key == 'v' || key == 'с' || key == 'м';
+			} </script>
 		<label for="exampleFormControlInput1">WGS 84 (Y Google):</label>
-		<input class="form-control" id="exampleFormControlInput1" onkeydown="return checkWGSKey(event.key)" type="text" name="ywgs" required>
+		<input class="form-control" id="ywgs" onkeydown="return checkWGSKey(event.key)" type="text" name="ywgs" required>
 	</td>
 	<td>
 		<label for="exampleFormControlInput1">WGS 84 (X Google):</label>
-		<input class="form-control" id="exampleFormControlInput1" onkeydown="return checkWGSKey(event.key)" type="text" name="xwgs" required>
+		<input class="form-control" id="xwgs" onkeydown="return checkWGSKey(event.key)" type="text" name="xwgs" required>
 	</td>
 </tr>
 <tr>
 	<td colspan="2">
 	<br>
-	<input type="submit" class="btn btn-primary" value="Перевірити координати" name="checking_coordinates" >
+	<input type="button" class="btn btn-primary" value="Перевірити координати" name="checking_coordinates" onclick="checkingCoordinates()">
+	<script>
+		var l = "https://www.google.com/maps/place/";
+		var x;
+		var y;
+	
+		function checkingCoordinates() {
+			x = document.getElementById("xwgs").value;
+			y = document.getElementById("ywgs").value;
+			window.open(l.concat(y).concat(",").concat(x));
+
+		<!-- https://www.google.com/maps/place/46.86537,32.499832 -->
+		}
+	</script>
 	</td>
 </tr>
 </table>
 
 <br>
-<!-- https://www.google.com/maps/place/46.86537,32.499832 -->
 
 <link rel="stylesheet" href="../chosen/chosen.min.css">
 <label for="exampleFormControlInput1">Область:</label>
