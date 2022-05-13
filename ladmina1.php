@@ -40,42 +40,69 @@ if (!mysqli_set_charset($link, "utf8")) {
 ?>
 <style type="text/css">
 	label {
-    color: #343a40;
-}
+    	color: #343a40;
+	}
+	table {
+		width: 100%;
+	}
+	td {
+		border: 20em;
+	}
 </style>
 <form action="<?php $_SERVER['PHP_SELF'] ?>" method="post" enctype="multipart/form-data">
 <div class="form-group">
-<label for="exampleFormControlInput1">Час</label>
-<input class="form-control" id="exampleFormControlInput1" type="time" name="chas" required>
-<label for="exampleFormControlInput1">Дата</label>
-<input class="form-control"  id="theDate" type="date" name="data" required>
-	<script> 
-		var date = new Date();
-		var day = date.getDate();
-		var month = date.getMonth() + 1;
-		var year = date.getFullYear();
-		if (month < 10) month = "0" + month;
-		if (day < 10) day = "0" + day;
-		var today = year + "-" + month + "-" + day;
-		document.getElementById("theDate").value = today;
-	</script>
+<table >
+<tr>
+	<td>
+		<label for="exampleFormControlInput1">Час:</label>
+		<input class="form-control" id="exampleFormControlInput1" type="time" name="chas" required>
+	</td>
+	<td>
+		<label for="exampleFormControlInput1">Дата:</label>
+		<input class="form-control"  id="theDate" type="date" name="data" required>
+		<script> 
+			var date = new Date();
+			var day = date.getDate();
+			var month = date.getMonth() + 1;
+			var year = date.getFullYear();
+			if (month < 10) month = "0" + month;
+			if (day < 10) day = "0" + day;
+			var today = year + "-" + month + "-" + day;
+			document.getElementById("theDate").value = today;
+		</script>
+	</td>
+</tr>
+<tr>
+	<td colspan="2">
+		<label for="exampleFormControlInput1">Тип:</label>
+		<input class="form-control" id="exampleFormControlInput1" type="text" name="tipe" required>
+	</td>
+</tr>
+<tr>
+	<td>
+		<script> function checkWGSKey(key) {return (key >= '0' && key <= '9') || key == '.' || key == 'ArrowLeft' 
+		|| key == 'ArrowRight' || key == 'Delete' || key == 'Backspace' || key == 'Control' || key == 'c' || key == 'v';} </script>
+		<label for="exampleFormControlInput1">WGS 84 (Y Google):</label>
+		<input class="form-control" id="exampleFormControlInput1" onkeydown="return checkWGSKey(event.key)" type="text" name="ywgs" required>
+	</td>
+	<td>
+		<label for="exampleFormControlInput1">WGS 84 (X Google):</label>
+		<input class="form-control" id="exampleFormControlInput1" onkeydown="return checkWGSKey(event.key)" type="text" name="xwgs" required>
+	</td>
+</tr>
+<tr>
+	<td colspan="2">
+	<br>
+	<input type="submit" class="btn btn-primary" value="Перевірити координати" name="checking_coordinates" >
+	</td>
+</tr>
+</table>
 
-<label for="exampleFormControlInput1">Тип</label>
-<input class="form-control" id="exampleFormControlInput1" type="text" name="tipe" required>
-
-<script> function checkWGSKey(key) {return (key >= '0' && key <= '9') || key == '.' || key == 'ArrowLeft' 
-	|| key == 'ArrowRight' || key == 'Delete' || key == 'Backspace' || key == 'Control' || key == 'c' || key == 'v';} </script>
-<label for="exampleFormControlInput1">WGS 84 (Y Google)</label>
-<input class="form-control" id="exampleFormControlInput1" onkeydown="return checkWGSKey(event.key)" type="text" name="ywgs" required>
-
-<label for="exampleFormControlInput1">WGS 84 (X Google)</label>
-<input class="form-control" id="exampleFormControlInput1" onkeydown="return checkWGSKey(event.key)" type="text" name="xwgs" required>
-
+<br>
 <!-- https://www.google.com/maps/place/46.86537,32.499832 -->
 
-
 <link rel="stylesheet" href="../chosen/chosen.min.css">
-<label for="exampleFormControlInput1">Область</label>
+<label for="exampleFormControlInput1">Область:</label>
 <select  class="js-chosen" class="form-control" id="exampleFormControlInput1" name="region"> 
         <option value="" selected="selected">Оберіть область</option>
         <?php 
@@ -92,7 +119,7 @@ if (!mysqli_set_charset($link, "utf8")) {
 			}
         ?>
     </select>
-<label for="exampleFormControlInput1">Населений пункт</label>
+<label for="exampleFormControlInput1">Населений пункт:</label>
 <select  class="js-chosen" class="form-control" id="exampleFormControlInput1" name="town"> 
         <option value="" selected="selected"></option>
         <?php 
@@ -109,16 +136,15 @@ if (!mysqli_set_charset($link, "utf8")) {
 			}
         ?>
     </select>
-
-<label for="exampleFormControlInput1">Координатор</label>
+<label for="exampleFormControlInput1">Координатор:</label>
 <input class="form-control" id="exampleFormControlInput1" type="text" name="name_inf" required>
-<label for="exampleFormControlInput1">Телефон</label>
+<label for="exampleFormControlInput1">Телефон:</label>
 <script> function checkPhoneKey(key) {return (key >= '0' && key <= '9') || key == 'ArrowLeft' || key == 'ArrowRight' 
 	|| key == 'Delete' || key == 'Backspace' || key == 'Control' || key == 'c' || key == 'v';} </script>
 <input class="form-control" id="exampleFormControlInput1" onkeydown="return checkPhoneKey(event.key)" type="tel" name="tel_inf" placeholder="Введите телефон" value="380" required>
-<label for="exampleFormControlInput1">Текст повідомлення</label>
+<label for="exampleFormControlInput1">Текст повідомлення:</label>
 <input class="form-control" id="exampleFormControlInput1" type="text" name="desc" required>
-<label for="exampleFormControlInput1">Статус</label>
+<label for="exampleFormControlInput1">Статус:</label>
 <select  class="form-control" id="exampleFormControlInput1" name="status"> 
     <option value="" selected="selected">Оберіть статус</option>
     <option VALUE="dorozvidka"> Дорозвідка</option>
@@ -132,7 +158,8 @@ if (!mysqli_set_charset($link, "utf8")) {
     border-radius: 0.25rem;transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;">
 <br>
 <input type="submit" class="btn btn-primary" name="add-site">
-</div></form>
+</div>
+</form>
 
 <?php
 $keysa = mysqli_query($link,'SELECT * FROM chip ORDER BY keysa DESC LIMIT 1' );	
