@@ -119,7 +119,7 @@ if (!mysqli_set_charset($link, "utf8")) {
 <input class="form-control" id="exampleFormControlInput1" type="text" name="name_inf" required>
 <label for="exampleFormControlInput1">Телефон</label>
 <script> function checkPhoneKey(key) {return (key >= '0' && key <= '9') || key == 'ArrowLeft' || key == 'ArrowRight' 
-	|| key == 'Delete' || key == 'Backspace' || key == 'Control' || key == 'v' || key == 'v';} </script>
+	|| key == 'Delete' || key == 'Backspace' || key == 'Control' || key == 'c' || key == 'v';} </script>
 <input class="form-control" id="exampleFormControlInput1" onkeydown="return checkPhoneKey(event.key)" type="tel" name="tel_inf" placeholder="Введите телефон" value="380" required>
 <label for="exampleFormControlInput1">Текст повідомлення</label>
 <input class="form-control" id="exampleFormControlInput1" type="text" name="desc" required>
