@@ -48,7 +48,6 @@ if (!mysqli_set_charset($link, "utf8")) {
 <label for="exampleFormControlInput1">Час</label>
 <input class="form-control" id="exampleFormControlInput1" type="time" name="chas" required>
 <label for="exampleFormControlInput1">Дата</label>
-<!-- <input class="form-control" id="exampleFormControlInput1" type="text" name="data"> -->
 <input class="form-control"  id="theDate" type="date" name="data" required>
 	<script> 
 		var date = new Date();
@@ -60,10 +59,6 @@ if (!mysqli_set_charset($link, "utf8")) {
 		var today = year + "-" + month + "-" + day;
 		document.getElementById("theDate").value = today;
 	</script>
-
-<!-- <input  class="form-control" id="exampleFormControlInput1" type="date" name="chas" max="' . $date_today . '" min="2021-04-02" style="padding: 11px;"> -->
-
-
 
 <label for="exampleFormControlInput1">Тип</label>
 <input class="form-control" id="exampleFormControlInput1" type="text" name="tipe" required>
@@ -115,7 +110,6 @@ if (!mysqli_set_charset($link, "utf8")) {
         ?>
     </select>
 
-<!-- <input class="form-control" id="exampleFormControlInput1" type="text" name="town" required> -->
 <label for="exampleFormControlInput1">Координатор</label>
 <input class="form-control" id="exampleFormControlInput1" type="text" name="name_inf" required>
 <label for="exampleFormControlInput1">Телефон</label>
