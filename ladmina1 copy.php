@@ -1,5 +1,4 @@
-<?php
-
+<?
 //include 'function.php';
 include 'header.php';
 
@@ -9,35 +8,56 @@ require_once 'GoogleAuthenticator.php';
 $ga = new PHPGangsta_GoogleAuthenticator();
 $secret = $ga->createSecret();
 echo "<p>Код: $secret </p>";
-$qrCodeUrl = $ga->getQRCodeGoogleUrl($login, $secret);
+$qrCodeUrl = $ga->getQRCodeGoogleUrl('Legioner', $secret);
 echo '<img src="'.$qrCodeUrl.'">';
 
 
+/* $oneCode = $ga->getCode($secret);
+echo "Checking Code '$oneCode' and Secret '$secret':\n";
 
-// function _auth(){
+$checkResult = $ga->verifyCode($secret, $oneCode, 2);    // 2 = 2*30sec clock tolerance
+if ($checkResult) {
+    echo 'OK';
+} else {
+    echo 'FAILED';
+} */
+
+
+
+
+/* function _auth(){
     
-//     $pass = '<jhcer4thn';
-//     if ( isset($_POST['pass_value'], $_POST['pass_btn']) ) {
-//         if ($pass == $_POST['pass_value']) {
-//             $_SESSION['unique_sdfcdrgbtrhbgfnb'] = true;
-//         } else {
-//             $_SESSION['sdfcdrgbtrhbgfnb'] = false;
-//             echo '<div>Failed password</div>';
-//         }
-//     }
-//     if ($_SESSION['unique_sdfcdrgbtrhbgfnb'] !== true) {
-//         echo '<form method="POST">'.
-//         '<div>Enter password:<br /><input type="text" name="pass_value" size="30" /></div>'.
-//         '<div><input type="submit" value="Enter" name="pass_btn" /></div>'.
-//         '</form>';
-//         die();
-//     }
-// }
+    $pass = '<jhcer4thn';
+    if ( isset($_POST['pass_value'], $_POST['pass_btn']) ) {
+        if ($pass == $_POST['pass_value']) {
+            $_SESSION['unique_sdfcdrgbtrhbgfnb'] = true;
+        } else {
+            $_SESSION['sdfcdrgbtrhbgfnb'] = false;
+            echo '<div>Failed password</div>';
+        }
+    }
+    if ($_SESSION['unique_sdfcdrgbtrhbgfnb'] !== true) {
+        echo '<form method="POST">'.
+        '<div>Enter password:<br /><input type="text" name="pass_value" size="30" /></div>'.
+        '<div><input type="submit" value="Enter" name="pass_btn" /></div>'.
+        '</form>';
+        die();
+    }
+} */
 
-// _auth();
+_auth();
 
 // db connect
-include 'db.php';
+$host = 'kt371968.mysql.tools';
+$database = 'kt371968_leg';
+$user = 'kt371968_leg';
+$password = '4@cgM7h)F5';
+$link = mysqli_connect($host, $user, $password, $database) or die("Ошибка " . mysqli_error($link));
+if (!mysqli_set_charset($link, "utf8")) {
+    exit();
+} else {
+
+}
 
 ?>
 
@@ -184,7 +204,7 @@ include 'db.php';
 <label for="exampleFormControlInput1">Телефон:</label>
 <script> function checkPhoneKey(key) {return (key >= '0' && key <= '9') || key == 'ArrowLeft' || key == 'ArrowRight' 
 	|| key == 'Delete' || key == 'Backspace' || key == 'Control' || key == 'c' || key == 'v';} </script>
-<input class="form-control" id="exampleFormControlInput1" onkeydown="return checkPhoneKey(event.key)" type="tel" name="tel_inf" placeholder="Введіть номер телефону" value="380" required>
+<input class="form-control" id="exampleFormControlInput1" onkeydown="return checkPhoneKey(event.key)" type="tel" name="tel_inf" placeholder="Введите телефон" value="380" required>
 <label for="exampleFormControlInput1">Текст повідомлення:</label>
 <input class="form-control" id="exampleFormControlInput1" type="text" name="desc" required>
 <label for="exampleFormControlInput1">Статус:</label>
